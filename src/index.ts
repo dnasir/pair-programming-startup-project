@@ -1,24 +1,6 @@
-import { Action, createStore } from 'redux';
-import { User } from '@/models/User';
-
-interface UserStore {
-    users: User[];
-}
-
-type StoreActions = 'getUsers' | 'updateUser';
-
-const store = createStore((state: UserStore, action: Action<StoreActions>) => {
-    if (typeof state === 'undefined') {
-        return {
-            users: []
-        };
-    }
-
-    switch (action.type) {
-        default:
-            return state;
-    }
-});
+import store from '@/store';
+import { flattenObj, renderDataJs } from './helpers';
+import $ from 'jquery';
 
 const userList = document.querySelector('[data-js=userList]');
 const userCardTemplate = document.querySelector('#userCardTmpl') as HTMLTemplateElement;
@@ -26,41 +8,43 @@ const userCardTemplate = document.querySelector('#userCardTmpl') as HTMLTemplate
 function renderUserList() {
     const state = store.getState();
 
+    // empty list
     userList.innerHTML = '';
 
+    // iterate over users list
     for (let i = 0; i < state.users.length; i++) {
         const user = state.users[i];
-        const clone = userCardTemplate.content.cloneNode(true) as HTMLElement;
+        const flattenedUser = flattenObj(user);
+        const tmplClone = userCardTemplate.content.cloneNode(true) as HTMLElement;
+        const userCard = renderDataJs(tmplClone, 'textContent', flattenedUser);
 
-        for (const key in user) {
-            if (Object.prototype.hasOwnProperty.call(user, key)) {
-                const fieldValue = user[key];
+        // so edit modal has something to use
+        userCard.querySelector('[data-js=editButton]').setAttribute('data-id', user.id.toString());
 
-                if (typeof fieldValue === 'object') {
-                    // flatten
-                    // TODO: add generic helper
-                    for (const _key in fieldValue) {
-                        if (Object.prototype.hasOwnProperty.call(fieldValue, _key)) {
-                            const _field = clone.querySelector(`[data-js="${key}.${_key}"]`);
-                            if (!_field) continue;
-
-                            _field.textContent = fieldValue[_key];
-                        }
-                    }
-                } else {
-                    const field = clone.querySelector(`[data-js=${key}]`);
-                    if (!field) continue;
-
-                    clone.querySelector(`[data-js=${key}]`).textContent = user[key];
-                }
-            }
-        }
-
-        clone.querySelector('[data-js=editButton]').setAttribute('data-uid', user.id.toString());
-
-        userList.appendChild(clone);
+        // add to list
+        userList.appendChild(userCard);
     }
 }
 
 renderUserList();
 store.subscribe(renderUserList);
+
+// init modal event listener
+$('#userModal').on('show.bs.modal', function (event: any) {
+    // reset form fields
+    (this.querySelector('[data-js=userForm]') as HTMLFormElement).reset();
+
+    const button = event.relatedTarget as HTMLButtonElement;
+    const id = button.getAttribute('data-id');
+
+    if (id) {
+        const state = store.getState();
+        const user = state.users.find(x => String(x.id) === id);
+
+        // if there is data, fill in the form
+        if (user) {
+            const flattenedUser = flattenObj(user);
+            renderDataJs(this, 'value', flattenedUser);
+        }
+    }
+});

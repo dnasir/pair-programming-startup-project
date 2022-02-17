@@ -7,8 +7,8 @@
         <title>Simple User Manager</title>
         <link
             rel="stylesheet"
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+            integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
             crossorigin="anonymous"
         />
     </head>
@@ -16,8 +16,67 @@
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="card-title">Users</h5>
+                    <h2 class="card-title">Users</h2>
+                    <div class="mb-4">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#userModal">Add new user</button>
+                    </div>
                     <div class="row" data-js="userList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="userModalLabel" data-js="modalTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form data-js="userForm">
+                            <input type="hidden" name="user_id" data-js="id" />
+                            <div class="form-group">
+                                <label for="user_name" class="col-form-label">Name</label>
+                                <input type="text" class="form-control" name="user_name" data-js="name" />
+                            </div>
+                            <div class="form-group">
+                                <label for="user_username" class="col-form-label">Username</label>
+                                <input type="text" class="form-control" name="user_username" data-js="username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="user_email" class="col-form-label">Email</label>
+                                <input type="text" class="form-control" name="user_email" data-js="email" />
+                            </div>
+                            <div class="form-group">
+                                <label for="user_address_street" class="col-form-label">Street</label>
+                                <input type="text" class="form-control" name="user_address_street" data-js="address_street" />
+                            </div>
+                            <div class="form-group">
+                                <label for="user_address_suite" class="col-form-label">Suite</label>
+                                <input type="text" class="form-control" name="user_address_suite" data-js="address_suite" />
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-sm-6">
+                                    <label for="user_address_city" class="col-form-label">City</label>
+                                    <input type="text" class="form-control" name="user_address_city" data-js="address_city" />
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <label for="user_address_zipcode" class="col-form-label">ZIP code</label>
+                                    <input type="text" class="form-control" name="user_address_zipcode" data-js="address_zipcode" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="user_phone" class="col-form-label">Phone</label>
+                                <input type="text" class="form-control" name="user_phone" data-js="phone" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-js="modalSaveBtn">Save</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,10 +100,10 @@
                                     <tr>
                                         <th scope="row">Address</th>
                                         <td>
-                                            <div data-js="address.street"></div>
-                                            <div data-js="address.suite"></div>
-                                            <div data-js="address.city"></div>
-                                            <div data-js="address.zipcode"></div>
+                                            <div data-js="address_street"></div>
+                                            <div data-js="address_suite"></div>
+                                            <div data-js="address_city"></div>
+                                            <div data-js="address_zipcode"></div>
                                         </td>
                                     </tr>
                                     <tr>
@@ -56,7 +115,7 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button class="btn btn-secondary btn-sm" data-js="editButton">
+                        <button class="btn btn-secondary btn-sm" data-js="editButton" data-toggle="modal" data-target="#userModal">
                             Edit
                         </button>
                     </div>
@@ -65,18 +124,19 @@
         </template>
 
         <script
-            src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"
         ></script>
         <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             crossorigin="anonymous"
         ></script>
+
         <script
-            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"
         ></script>
     </body>
