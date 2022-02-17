@@ -26,13 +26,6 @@ The main objective is to implement the front-end UI for a basic CRUD operation. 
 
 **The REST API does not persist the data that gets sent to it.** However, it does simulate a successful response when a compliant request is made. Candidate must take this into consideration when building the data layer.
 
-## Important points
-
-* TypeScript is a must.
-* Responsive design is a must.
-* Themeability is optional, but good to have.
-* Accessibility is optional, but good to have.
-
 ## Resources
 
 * REST API: https://my-json-server.typicode.com/dnasir/my-json-server/users

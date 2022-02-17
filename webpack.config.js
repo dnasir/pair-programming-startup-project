@@ -13,7 +13,10 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js']
+        alias: {
+            '@': path.resolve(__dirname, 'src')
+        },
+        extensions: ['.tsx', '.ts', '.js'],
     },
     output: {
         filename: 'bundle.js',
@@ -21,7 +24,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'public/index.html')
+            template: path.resolve(__dirname, 'public/index.html'),
+            inject: 'body'
         })
     ],
     devServer: {
