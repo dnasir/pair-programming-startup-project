@@ -16,7 +16,7 @@ module.exports = {
         alias: {
             '@': path.resolve(__dirname, 'src')
         },
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js']
     },
     output: {
         filename: 'bundle.js',
@@ -28,6 +28,9 @@ module.exports = {
             inject: 'body'
         })
     ],
+    externals: {
+        jquery: 'jQuery'
+    },
     devServer: {
         static: {
             directory: path.join(__dirname, 'public')
