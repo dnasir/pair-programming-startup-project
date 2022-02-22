@@ -29,53 +29,53 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="userModalLabel" data-js="modalTitle"></h5>
+                        <h5 class="modal-title" id="userModalLabel">User details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <form data-js="userForm">
-                            <input type="hidden" name="user_id" data-js="id" />
+                            <input type="hidden" name="id" />
                             <div class="form-group">
-                                <label for="user_name" class="col-form-label">Name</label>
-                                <input type="text" class="form-control" name="user_name" data-js="name" />
+                                <label for="name" class="col-form-label">Name</label>
+                                <input type="text" class="form-control" name="name" />
                             </div>
                             <div class="form-group">
-                                <label for="user_username" class="col-form-label">Username</label>
-                                <input type="text" class="form-control" name="user_username" data-js="username" />
+                                <label for="username" class="col-form-label">Username</label>
+                                <input type="text" class="form-control" name="username" />
                             </div>
                             <div class="form-group">
-                                <label for="user_email" class="col-form-label">Email</label>
-                                <input type="text" class="form-control" name="user_email" data-js="email" />
+                                <label for="email" class="col-form-label">Email</label>
+                                <input type="email" class="form-control" name="email" />
                             </div>
                             <div class="form-group">
-                                <label for="user_address_street" class="col-form-label">Street</label>
-                                <input type="text" class="form-control" name="user_address_street" data-js="address_street" />
+                                <label for="address_street" class="col-form-label">Street</label>
+                                <input type="text" class="form-control" name="address_street" />
                             </div>
                             <div class="form-group">
-                                <label for="user_address_suite" class="col-form-label">Suite</label>
-                                <input type="text" class="form-control" name="user_address_suite" data-js="address_suite" />
+                                <label for="address_suite" class="col-form-label">Suite</label>
+                                <input type="text" class="form-control" name="address_suite" />
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-sm-6">
-                                    <label for="user_address_city" class="col-form-label">City</label>
-                                    <input type="text" class="form-control" name="user_address_city" data-js="address_city" />
+                                    <label for="address_city" class="col-form-label">City</label>
+                                    <input type="text" class="form-control" name="address_city" />
                                 </div>
                                 <div class="form-group col-sm-6">
-                                    <label for="user_address_zipcode" class="col-form-label">ZIP code</label>
-                                    <input type="text" class="form-control" name="user_address_zipcode" data-js="address_zipcode" />
+                                    <label for="address_zipcode" class="col-form-label">ZIP code</label>
+                                    <input type="text" class="form-control" name="address_zipcode" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="user_phone" class="col-form-label">Phone</label>
-                                <input type="text" class="form-control" name="user_phone" data-js="phone" />
+                                <label for="phone" class="col-form-label">Phone</label>
+                                <input type="tel" class="form-control" name="phone" />
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-js="modalSaveBtn">Save</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" data-js="modalSaveBtn">Save</button>
                     </div>
                 </div>
             </div>

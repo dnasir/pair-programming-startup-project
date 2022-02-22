@@ -1,27 +1,20 @@
-export function flattenObj(obj: any, parent: string = '', res: any = {}) {
-    for (const key in obj) {
-        const propName = parent ? parent + '_' + key : key;
-
-        if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
-            flattenObj(obj[key], propName, res);
-        } else {
-            res[propName] = obj[key];
-        }
-    }
-
-    return res;
-}
-
-export function renderDataJs<T extends HTMLElement>(el: HTMLElement, propName: string, obj: any) {
+/**
+ *
+ * @param el Template HTML
+ * @param attrName HTML attribute to use for locating.
+ * @param propName HTML property to assign value to.
+ * @param obj Object to get data from.
+ * @returns
+ */
+export function applyDataToTemplate<T extends HTMLElement>(el: HTMLElement, attrName: string, propName: string, obj: any) {
     // iterate over user properties and set values
-    for (const key in obj) {
-        if (Object.prototype.hasOwnProperty.call(obj, key)) {
-            const field = el.querySelector(`[data-js=${key}]`) as T;
-            if (!field) continue;
-            // have to cast to any, else TS will complain
-            (field as any)[propName] = obj[key];
-        }
-    }
+    Object.keys(obj).forEach(key => {
+        const field = el.querySelector(`[${attrName}=${key}]`) as T;
+        if (!field) return;
+
+        // have to cast to any, else TS will complain
+        (field as any)[propName] = obj[key];
+    });
 
     return el;
 }
